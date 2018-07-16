@@ -1,0 +1,209 @@
+<!DOCTYPE html>
+<html>
+	<!--
+    	作者：Caronell Arnold
+    	时间：2018-07-16
+    	描述：小辣鸡计算器，JS + CSS + HTML5 练习
+    	参考：https://github.com/dunizb/sCalc
+    -->
+
+	<head>
+		<meta charset="utf-8" />
+		<title>小辣鸡计算器</title>
+		<meta name="viewport" content="initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0, user-scalable=no" />
+		<script type="text/javascript" src="Calculate Core.js"></script>
+		<style type="text/css">
+			html, body {
+				height: 100%;
+				-webkit-tap-highlight-color: rgba(0, 0, 0, 0);
+			}
+			
+			body {
+				padding: 0;
+				margin: 0;
+				background-color: whitesmoke;
+				font: 14px/1.5 "Microsoft Yahei", Tahoma, "Lucida Grande", Verdana, STXihei, hei;
+				-webkit-user-select: none;
+				-moz-user-select: none;
+				-ms-user-select: none;
+				user-select: none;
+			}
+			
+			#total {
+				width: 100%;
+				height: 100%;
+				min-width: 300px;
+				max-width: 640px;
+				margin: 0 auto;
+				position: relative;
+				overflow: hidden;
+			}
+			
+			.calc {
+				position: relative;
+				width: 100%;
+				height: 100%;
+				box-sizing: border-box;
+				background-color: whitesmoke;
+				overflow: hidden;
+			}
+			
+			main {
+				width: 100%;
+				height: 100%;
+			}
+			
+			main ul {
+				list-style: none;
+				padding: 0;
+				margin-top: 0;
+				width: 100%;
+				height: 100%;
+				cursor: pointer;
+			}
+			
+			main ul li {
+				width: 20%;
+				height: 10%;
+				font-size: 22px;
+				float: left;
+				color: darkslategrey;
+				text-align: center;
+				border-left: 1px solid rgb(185,185,185);
+				border-top: 1px solid rgb(185,185,185);
+				box-sizing: border-box;
+				text-shadow: 0 1px 1px rgba(0, 0, 0, 0.2);
+			}
+			
+			main ul input {
+				width: 100%;
+				height: 30%;
+				padding: 30px;
+				font-size: 42px;
+				float: left;
+				text-align: right;
+				border-left: 1px solid #000;
+				border-top: 1px solid #000;
+				box-sizing: border-box;
+				text-shadow: 0 2px 1px rgba(0, 0, 0, 0.2);
+			}
+			
+			main ul li:nth-child(5n-3) {
+				background-color: gainsboro;
+			}
+			
+			main ul li:nth-child(3) {
+				background-color: gainsboro;
+			}
+			
+			main ul li:nth-child(4) {
+				background-color: gainsboro;
+			}
+			
+			main ul li:nth-child(5) {
+				background-color: gainsboro;
+			}
+			
+			main ul li:nth-child(6) {
+				background-color: gold;
+			}
+			
+			main ul li:nth-last-child(1) {
+				background-color: darkorange;
+				color: #fff;
+				width: 40%;
+			}
+			
+			main ul li:nth-last-child(2) {
+				color: orangered;
+				width: 40%;
+			}
+			
+			main ul li[id='disable'] {
+				cursor: default;
+				color: lightgray;
+				text-shadow: 0 0 0;
+			}
+			
+			/*使用伪元素使文字居中*/
+			
+			main ul li:before {
+				display: inline-block;
+				content: "";
+				height: 100%;
+				vertical-align: middle;
+			}
+			
+			#calc main ul li:active {
+				background-color: darkgray;
+			}
+			
+			#calc main ul li[id='=']:active {
+				background-color: rgb(219,107,6);
+			}
+			
+			#calc main ul li[id='←']:active {
+				background-color: goldenrod;
+			}
+			
+			#calc main ul li[id='disable']:active {
+				background-color: gainsboro;
+			}
+			
+			@keyframes move {
+				0% {
+					transform: rotate3d(0, 0, 1, 0deg);
+				}
+				100% {
+					transform: rotate3d(0, 0, 1, 360deg);
+				}
+			}
+		</style>
+	</head>
+
+	<body>
+		<div id="total">
+			<div class="calc" id="calc">
+				<main>
+					<ul id="list">
+						<input type="text" name="result" id="ans" readonly="readonly" />
+						<li id="2nd" onclick="getnum()">2nd</li>
+						<li id="sin" onclick="getnum()">sin</li>
+						<li id="cos" onclick="getnum()">cos</li>
+						<li id="tan" onclick="getnum()">tan</li>
+						<li id="←" onclick="getnum()">←</li>
+						<li id="mode" onclick="getnum()">deg</li>
+						<li id="lg" onclick="getnum()">lg</li>
+						<li id="ln" onclick="getnum()">ln</li>
+						<li id="×" onclick="getnum()">×</li>
+						<li id="÷" onclick="getnum()">÷</li>
+						<li id="^" onclick="getnum()">^</li>
+						<li id="1" onclick="getnum()">1</li>
+						<li id="2" onclick="getnum()">2</li>
+						<li id="3" onclick="getnum()">3</li>
+						<li id="+" onclick="getnum()">+</li>
+						<li id="√" onclick="getnum()">√</li>
+						<li id="4" onclick="getnum()">4</li>
+						<li id="5" onclick="getnum()">5</li>
+						<li id="6" onclick="getnum()">6</li>
+						<li id="-" onclick="getnum()">-</li>
+						<li id="!" onclick="getnum()">!</li>
+						<li id="7" onclick="getnum()">7</li>
+						<li id="8" onclick="getnum()">8</li>
+						<li id="9" onclick="getnum()">9</li>
+						<li id="(" onclick="getnum()">(</li>
+						<li id="π" onclick="getnum()">π</li>
+						<li id="%" onclick="getnum()">%</li>
+						<li id="0" onclick="getnum()">0</li>
+						<li id="." onclick="getnum()">.</li>
+						<li id=")" onclick="getnum()">)</li>
+						<li id="e" onclick="getnum()">e</li>
+						<li id="clear" onclick="getnum()">AC</li>
+						<li id="=" onclick="getnum()">=</li>
+					</ul>
+				</main>
+			</div>
+		</div>
+	</body>
+
+</html>
